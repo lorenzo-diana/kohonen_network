@@ -12,7 +12,7 @@ from dist_list import *
 
 # global values
 ax=None
-btn_try_sample=None
+btn_test_sample=None
 my_net=None
 trained_weights=None
 canvas=None
@@ -21,17 +21,17 @@ connect_weights_points=True
 window = Tk()
 
 # select one of the input sample, then highlights that sample and the neuron closest to it (the neuron that shuol recognize the activation that input)
-def btn_try_clicked():
+def btn_test_clicked():
 	input=training_set[int(np.random.rand(1)*(training_set.shape[0]-1)) , :]
 	max_out_index=my_net.min_dist(input, trained_weights)
-	if btn_try_sample[0]==None:
-		btn_try_sample[0], = ax.plot(input[0], input[1], 's', c='#d94ffb') #'#01ff07')
-		btn_try_sample[1], = ax.plot(trained_weights[0,max_out_index], trained_weights[1,max_out_index], 'X', c='#1805db') #'#0165fc')
+	if btn_test_sample[0]==None:
+		btn_test_sample[0], = ax.plot(input[0], input[1], 's', c='#d94ffb') #'#01ff07')
+		btn_test_sample[1], = ax.plot(trained_weights[0,max_out_index], trained_weights[1,max_out_index], 'X', c='#1805db') #'#0165fc')
 	else:
-		btn_try_sample[0].set_xdata(input[0])
-		btn_try_sample[0].set_ydata(input[1])
-		btn_try_sample[1].set_xdata(trained_weights[0,max_out_index])
-		btn_try_sample[1].set_ydata(trained_weights[1,max_out_index])
+		btn_test_sample[0].set_xdata(input[0])
+		btn_test_sample[0].set_ydata(input[1])
+		btn_test_sample[1].set_xdata(trained_weights[0,max_out_index])
+		btn_test_sample[1].set_ydata(trained_weights[1,max_out_index])
 	canvas.draw()
 
 # creates the Kohonen network and trains it
@@ -41,12 +41,12 @@ def btn_start_clicked():
 	global canvas
 	global training_set
 	global ax
-	global btn_try_sample
-	# disable start and try buttons during execution of the funxtion
-	btn_try["state"] = DISABLED
+	global btn_test_sample
+	# disable start and test buttons during execution of the funxtion
+	btn_test["state"] = DISABLED
 	btn_start["state"] = DISABLED
 	btn_start["text"]="Working..."
-	btn_try_sample=[None, None]
+	btn_test_sample=[None, None]
 	# close plot from previously run of this function
 	plt.close('all')
 	fig=Figure(figsize=(5,5), dpi=100)
@@ -100,10 +100,10 @@ def btn_start_clicked():
 		print('Error during learning phase!')
 		exit()
 	
-	# restore normal behavior for start and try buttons
+	# restore normal behavior for start and test buttons
 	btn_start["state"] = NORMAL
 	btn_start["text"]="Start"
-	btn_try["state"] = NORMAL
+	btn_test["state"] = NORMAL
 
 def topology_type_change_callback(*args):
 	global connect_weights_points
@@ -180,7 +180,7 @@ if __name__ == "__main__":
 	btn_start = Button(window, text="Start", command=btn_start_clicked)
 	btn_start.grid(column=0, row=8)
 	
-	btn_try = Button(window, text="Try random sample", command=btn_try_clicked, state=DISABLED)
-	btn_try.grid(column=1, row=8)
+	btn_test = Button(window, text="Test random sample", command=btn_test_clicked, state=DISABLED)
+	btn_test.grid(column=1, row=8)
 	
 	window.mainloop()
