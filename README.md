@@ -6,6 +6,10 @@ The GUI allows to select some parameters, such as:
 - The number of input samples and output neurons to be used;
 - The number of epochs to be performed.
 
-During the training phase the training samples and the output neurons are plotted, and after each epoch the output neurons are updated to show the training process. In the below image is shown how the GUI looks like.
+During the training phase the training samples and the output neurons are plotted, and after each epoch the output neurons are updated to show the training process.
+
+Once the training phase is completed, you can use the "Test" button to highlight one of the input samples and the output neuron responsible for recognizing that particular input.
+
+In the below image is shown how the GUI looks like.
 
 <img src="app_GUI.png" width="380">
