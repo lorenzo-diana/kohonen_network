@@ -115,7 +115,7 @@ def topology_type_change_callback(*args):
 		connect_weights_points=True
 
 if __name__ == "__main__":
-	window.title("Simple Kohonen network example")
+	window.title("Kohonen network example")
 	window.geometry('500x720')
 	
 	# create variable for the GUI elements
